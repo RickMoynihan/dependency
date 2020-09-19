@@ -91,19 +91,19 @@
                       {:reason ::circular-dependency
                        :node node
                        :dependency dep})))
-    (MapDependencyGraph.
+    (->MapDependencyGraph
      (update-in dependencies [node] set-conj dep)
      (update-in dependents [dep] set-conj node)))
   (remove-edge [graph node dep]
-    (MapDependencyGraph.
+    (->MapDependencyGraph
      (update-in dependencies [node] disj dep)
      (update-in dependents [dep] disj node)))
   (remove-all [graph node]
-    (MapDependencyGraph.
+    (->MapDependencyGraph
      (remove-from-map dependencies node)
      (remove-from-map dependents node)))
   (remove-node [graph node]
-    (MapDependencyGraph.
+    (->MapDependencyGraph
      (dissoc dependencies node)
      dependents)))
 
